@@ -39,13 +39,17 @@ context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
         cy.get('.woocommerce-info').should('contain', 'Você tem um cupom de desconto?')
         cy.get('#billing_first_name').clear().type('Aline')
         cy.get('#billing_last_name').clear().type('teste')
-        cy.get('select2-billing_country-container').click('Brasil')
+        cy.get('#select2-billing_country-container').should('have.text', 'Brasil')
         cy.get('#billing_address_1').clear().type('RUA')
-        cy.get('#billing_city').clear().type('Osasco')        
+        cy.get('#billing_city').clear().type('Osasco')    
+        cy.get('#select2-billing_state-container').should('have.text', 'São Paulo')    
         cy.get('#billing_postcode').clear().type('06112040')
         cy.get('#billing_phone').clear().type('945474845')
         cy.get('#billing_email').clear().type('aluno.teste@ebac.com.br')
-        cy.get('woocommerce_checkout_place_order').click()
+        cy.get('#terms').click()
+        cy.get('#place_order').click()
+
+        cy.get('.woocommerce-notice').should('contain', 'Obrigado. Seu pedido foi recebido.')
      
     });
 });
