@@ -21,10 +21,10 @@ class produtosPage {
         cy.visit(`produtos/${urlFormatada}`)
     }
 
-    addProdutoCarrinho(tamanho, cor, quantiddade) {
+    addProdutoCarrinho(tamanho, cor,quantidade) {
         cy.get('.button-variable-item-' + tamanho).click()
         cy.get('.button-variable-item-' + cor).click()
-        cy.get('.plus').click()
+        cy.get('.plus').click(quantidade)
         cy.get('.single_add_to_cart_button').click()
     }
 

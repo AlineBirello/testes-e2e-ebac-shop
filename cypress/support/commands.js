@@ -4,20 +4,19 @@ Cypress.Commands.add('login', (usuario, senha) => {
     cy.get('.woocommerce-form > .button').click()
 });
 
-Cypress.Commands.add('SelecProduto', (tamanho, cor, quantidade) => {
-    cy.get('.search > .tbay-search-form > .form-ajax-search > .form-group > .input-group > .button-group > .button-search').click()
-    cy.get('products> .row')
-        .contains(nomeProduto)
-        .click()
-        cy.get('.button-variable-item-' + tamanho).click()
-        cy.get('.button-variable-item-' + cor).click()
-        cy.get('.plus').click(quantidade)
-        cy.get('.single_add_to_cart_button').click()       
-        cy.get('.woocommerce-message > .button').click()
-        cy.get('.checkout-button').click()
+Cypress.Commands.add('selecProduto', (tamanho, cor, quantidade) => {
+    cy.get('.post-3111 > .product-block')
+    .contains('Aero Daily Fitness Tee')
+    .click()
+    cy.get('.button-variable-item-' + tamanho).click()
+    cy.get('.button-variable-item-' + cor).click()
+    cy.get('.plus').click(quantidade)
+    cy.get('.single_add_to_cart_button').click()       
+    cy.get('.woocommerce-message > .button').click()
+    cy.get('.checkout-button').click()
 })
 
-Cypress.Commands.add('SelecCadastro', (nome,sobrenome,País,Endereço,Cidade,Estado,CEP,Telefone,Email) => {
+Cypress.Commands.add('selecCadastro', (nome,sobrenome,País,Endereço,Cidade,Estado,CEP,Telefone,Email) => {
     cy.get('#billing_first_name').type(nome)
     cy.get('#billing_last_name').type(sobrenome)
     cy.get('#select2-billing_country-container').should('have.text', País)

@@ -1,7 +1,6 @@
 /// <reference types="cypress" />
 
 import produtosPage from "../support/page_objects/produtos.page";
-
 context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
     /*  Como cliente 
         Quero acessar a Loja EBAC 
@@ -14,18 +13,15 @@ context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
     beforeEach(() => {
         cy.visit('minha-conta')
         cy.login('aluno_ebac@teste.com', 'teste@teste.com')
-        produtosPage.buscarProduto
-                
+        cy.visit('produtos')
+                    
     })
 
     it('Quero fazer pedido', () => {
-        produtosPage.buscarProdutoLista('Josie Yoga Jacket')
-        produtosPage.addProdutoCarrinho('S','Black', '2')
-        cy.get('.single_add_to_cart_button').click()
-        cy.get('.woocommerce-message').should('contain', ' 2 × “Augusta Pullover Jacket” foram adicionados no seu carrinho.')
+        cy.get('.post-3111 > .product-block').should('contain', 'Aero Daily Fitness Tee')
+        cy.selecProduto('S', 'Black', 2)
         cy.get('.woocommerce-info').should('contain', 'Você tem um cupom de desconto?')
-
-        cy.selecCadastro('Aluno','Ebac','Brasil','Rua','Osasco','São Paulo', '06112040', '11947587485','aluno_ebac@teste.com')
+        cy.selecCadastro('Aluno','Ebac','Brasil','Rua','Osasco','Mato Grosso do Sul', '06112040', '11947587485','aluno_ebac@teste.com')
         cy.get('.woocommerce-notice').should('contain', 'Obrigado. Seu pedido foi recebido.')
      
     });
